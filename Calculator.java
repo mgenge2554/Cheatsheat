@@ -60,7 +60,7 @@ public class Calculator {
                 isRunning = false;
             }else if(quit == 'n'){
                 continue;
-
+//comment
             }
 
         }
