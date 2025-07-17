@@ -11,15 +11,16 @@ public class Calculator {
         double answer;
 
         boolean isRunning = true;
-        boolean Calculating = true;
+
 
         while (isRunning) {
             System.out.println("Please enter the first number");
             number1 = scanner.nextDouble();
             System.out.println("Please enter an operator (*, /, +, -)");
-            operator = scanner.next().charAt(0);
+            operator = scanner.next().toUpperCase().charAt(0);
             System.out.println("Please enter a second number");
             number2 = scanner.nextDouble();
+            boolean Calculating = true;
             while(Calculating){
                 switch (operator) {
                     case '*' -> {
@@ -55,10 +56,10 @@ public class Calculator {
             }
             System.out.println("Would you like to quit? (y/n)");
             quit = scanner.next().charAt(0);
-            if(quit == 'y'){
+            if(quit == 'Y'){
                 System.out.println("Thank you");
                 isRunning = false;
-            }else if(quit == 'n'){
+            }else if(quit == 'N'){
                 continue;
 //comment
             }
