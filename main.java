@@ -112,7 +112,8 @@ public class main {
                                 book.displayInfo();
                                 books.add(book);
                                 System.out.println("Book has been added");
-                                books.get(i).displayInfo();
+
+                                libaryLength = books.toArray().length;
 
 
                             } else if (AdminChoice == '2') {
@@ -162,7 +163,7 @@ public class main {
                                 }
                             }else if (AdminChoice == '5') {
                                 isLogedIn = false;
-                                return;
+
                             }
                         }
                     }
