@@ -127,7 +127,15 @@ public class main {
                                         }
 
 
-                                    if (username.length() < 4 || username.length() > 12) {
+                                   
+
+                                }
+                            } else if (AdminChoice == '3') {
+                                System.out.print("please enter a Username: ");
+                                username = scanner.nextLine();
+                                System.out.print("please enter a Password: ");
+                                password = scanner.nextLine();
+                                 if (username.length() < 4 || username.length() > 12) {
                                         System.out.println("username must be between 4 - 12 characters");
 
                                     }else if (username.contains(" ") || username.contains("_")) {
@@ -147,16 +155,7 @@ public class main {
 
                                     }
 
-                                }
-                            } else if (AdminChoice == '3') {
-                                System.out.print("please enter a Username: ");
-                                username = scanner.nextLine();
-                                System.out.print("please enter a Password: ");
-                                password = scanner.nextLine();
-
-                                users.add(new User(username, password));
-                                System.out.println(Arrays.asList(users));
-                                isLogedIn = false;
+                                
 
                             } else if (AdminChoice == '4') {
                                 isLogedIn = false;
