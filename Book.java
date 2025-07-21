@@ -17,10 +17,12 @@ public class Book {
     }
 
     void displayInfo() {
+        System.out.println("------------------------------");
         System.out.println("Title: " + this.title);
         System.out.println("Author: " + this.author);
         System.out.println("# of pages: " + this.pages);
         System.out.println("Rented: " + this.isRented);
+        System.out.println("------------------------------");
     }
 
     String getTitle() {
