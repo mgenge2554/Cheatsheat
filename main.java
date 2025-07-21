@@ -132,7 +132,7 @@ public class main {
 
                                     }else if (username.contains(" ") || username.contains("_")) {
                                         System.out.println("make sure there is no spaces or _");
-
+//a
                                     }else if (!password.contains("!") && !password.contains("£")
                                             && !password.contains("#") && !password.contains("%") &&
                                             !password.contains("@")) {
