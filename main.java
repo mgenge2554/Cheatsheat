@@ -13,7 +13,7 @@ import java.util.Timer;
 public class main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-//
+
 //Variables
         Timer timer = new Timer();
 
