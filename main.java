@@ -63,6 +63,7 @@ public class main {
             logInChoice = scanner.next().charAt(0);
 
 
+
             if (logInChoice == '1') {
                 System.out.println("Please enter your Username and password");
                 System.out.print("Username: ");
@@ -158,6 +159,7 @@ public class main {
                                     }
                                 }
                             } else if (AdminChoice == '4') {
+                                libaryLength = books.toArray().length;
                                 for(int y = 0 ; y < libaryLength ; y++){
                                     books.get(y).displayInfo();
                                 }
@@ -261,4 +263,5 @@ public class main {
 
         scanner.close();
     }
+
 }
