@@ -234,12 +234,12 @@ public class main {
                             } else if (option == '2') {
                                 System.out.print("please enter the title of the book: ");
                                 String bookReturn = scanner.nextLine();
-                                for (int y = 0; y < users.toArray().length; y++) {
+                                for (int y = 0; y < books.toArray().length; y++) {
                                     if(bookReturn.equals(books.get(y).getTitle())){
                                         if(books.get(y).isRented){
                                             books.get(y).setisRented(false);
-                                            users.get(y).numberOfBooks--;
-                                            users.get(y).rentedList.remove(bookReturn);
+                                            //users.get(y).numberOfBooks--;
+                                            //users.get(y).rentedList.remove(bookReturn);
                                             System.out.println("book has been returned");
                                         }
                                     }
