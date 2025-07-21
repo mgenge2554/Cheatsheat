@@ -166,7 +166,8 @@ public class main {
                             System.out.println("""
                                     Please choose an Option
                                        1. Search a book
-                                       2. Log out
+                                       2. Return a book
+                                       3. Log out
                                     """);
                             char option = scanner.next().charAt(0);
                             scanner.nextLine();
@@ -212,6 +213,22 @@ public class main {
 
 
                             } else if (option == '2') {
+                                System.out.print("please enter the title of the book: ");
+                                String bookReturn = scanner.nextLine();
+                                for (int y = 0; y < users.toArray().length; y++) {
+                                    if(bookReturn.equals(books.get(y).getTitle())){
+                                        if(books.get(y).isRented){
+                                            books.get(y).setisRented(false);
+                                            users.get(y).numberOfBooks--;
+                                            users.get(y).rentedList.remove(bookReturn);
+                                            System.out.println("book has been returned");
+                                        }
+                                    }
+
+                                }
+                            }
+
+                            else if (option == '3') {
                                 isLogedIn = false;
                             }
 
