@@ -126,6 +126,25 @@ public class main {
                                             System.out.println("not found");
                                         }
 
+
+                                    if (username.length() < 4 || username.length() > 12) {
+                                        System.out.println("username must be between 4 - 12 characters");
+
+                                    }else if (username.contains(" ") || username.contains("_")) {
+                                        System.out.println("make sure there is no spaces or _");
+
+                                    }else if (!password.contains("!") && !password.contains("£")
+                                            && !password.contains("#") && !password.contains("%") &&
+                                            !password.contains("@")) {
+                                        System.out.println("A password must include a !, £, #, %, @");
+
+                                    }else{
+                                        users.add(new User(username, password));
+
+                                    //System.out.println(Arrays.asList(users)); // Confirms data entered
+                                    isCorrect= false;
+                                    isLogedIn = false;
+
                                     }
 
                                 }
@@ -141,12 +160,22 @@ public class main {
 
                             } else if (AdminChoice == '4') {
                                 isLogedIn = false;
+
+                                return;
+                            }
+                        }
+                    }
+                }
+            }
+            else if (logInChoice == '2') {
+=======
                             }
 
                         }
                     }
                 }
             } else if (logInChoice == '2') {
+
                 System.out.println("Please enter your Username and password");
                 System.out.print("Username: ");
                 scanner.nextLine();
@@ -180,6 +209,36 @@ public class main {
                                 System.out.println(TitleSearch);
 
 
+
+                                for (Book book : books) {
+                                    if (TitleSearch.equals(book.getTitle())) {
+                                        System.out.println("Book found");
+                                        if (book.isRented) {
+                                            System.out.println("cannot be rented");
+                                        } else if (!book.isRented) {
+                                            System.out.println("Would you like to rent? [Y/N] ");
+                                            char answer = scanner.next().toUpperCase().charAt(0);
+                                            if (answer == 'Y') {
+                                                book.setisRented(true);
+                                                user1.numberOfBooks++;
+                                                System.out.println(users.get(i).numberOfBooks);
+                                                rentedList.add(TitleSearch);
+                                                System.out.println(rentedList);
+
+
+                                            } else {
+                                                System.out.println("not found");
+                                            }
+                                            if (users.get(i).numberOfBooks > 3) {
+                                                book.setisRented(false);
+                                                System.out.println("you have too many books out");
+                                                users.get(i).numberOfBooks--;
+                                                System.out.println(users.get(i).numberOfBooks);
+                                            }
+                                        }
+                                    }
+                                }
+
                                     for (Book book : books) {
                                         if (TitleSearch.equals(book.getTitle())) {
                                             System.out.println("Book found");
@@ -208,6 +267,7 @@ public class main {
                                             }
                                         }
                                     }
+
 
 
 
