@@ -140,22 +140,23 @@ public class main {
                                     if (username.length() < 4 || username.length() > 12) {
                                         System.out.println("username must be between 4 - 12 characters");
 
-                                    }
-                                    if (username.contains(" ") || username.contains("_")) {
+                                    }else if (username.contains(" ") || username.contains("_")) {
                                         System.out.println("make sure there is no spaces or _");
 
-                                    }
-                                    if (!password.contains("!") && !password.contains("£")
+                                    }else if (!password.contains("!") && !password.contains("£")
                                             && !password.contains("#") && !password.contains("%") &&
                                             !password.contains("@")) {
                                         System.out.println("A password must include a !, £, #, %, @");
 
-                                    }
+
+
+                                    }else {
 
                                         users.add(new User(username, password));
                                         //System.out.println(Arrays.asList(users)); // Confirms data entered
-                                    isCorrect= false;
-                                    isLogedIn = false;
+                                        isCorrect = false;
+                                        isLogedIn = false;
+                                    }
                                 }
                             } else if (AdminChoice == '4') {
                                 for(int y = 0 ; y < libaryLength ; y++){
