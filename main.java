@@ -1,7 +1,6 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class main {
@@ -61,7 +60,7 @@ public class main {
         String username;
         String password;
         boolean isRunning = true;
-        boolean isLogedIn = true;
+        boolean isLogedIn;
         boolean isCorrect = true;
 
 
@@ -93,7 +92,7 @@ public class main {
 
                 // Admin menu
                 while (isLogedIn) {
-                    boolean ist = true;
+
 
                         for (int i = 0; i < AdminLength; i++) {
                             if (AdminLogInfo.get(i).getUsername().equals(username) && (AdminLogInfo.get(i).getPassword().equals(password))) {
@@ -143,7 +142,7 @@ public class main {
                                             if (search.equals(book.getTitle())) {
                                                 books.remove(book);
                                                 System.out.println("book deleted");
-                                                System.out.println(Arrays.asList(books));
+                                                System.out.println(books);
                                             }
                                         }
                                     }
@@ -219,7 +218,6 @@ public class main {
 
                                 System.out.println("Please type in a book title: ");
                                 String TitleSearch = scanner.nextLine();
-
                                 System.out.println(TitleSearch);
 
 
@@ -238,8 +236,6 @@ public class main {
                                                 rentedList.add(TitleSearch);
                                                 System.out.println(rentedList);
                                                 Renting();
-
-
 
                                             } else {
                                                 System.out.println("not found");
@@ -287,7 +283,7 @@ public class main {
 
         scanner.close();
     }
-    static LocalDateTime Renting(){
+    static void Renting(){
 
 
         LocalDateTime beginTime = LocalDateTime.now();
@@ -295,7 +291,6 @@ public class main {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         System.out.println(beginTime.format(formatter));
         System.out.println("Your Book due date is " + endTime.format(formatter));
-        return endTime;
 
     }
     static void Returned(LocalDateTime endTime){
