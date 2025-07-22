@@ -280,7 +280,7 @@ public class main {
                 isRunning = false;
             }
         }
-
+//
         scanner.close();
     }
     static void Renting(){
