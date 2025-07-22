@@ -235,7 +235,6 @@ public class main {
                                                 Renting();
 
 
-
                                             } else {
                                                 System.out.println("not found");
                                             }
@@ -256,6 +255,7 @@ public class main {
                                     if(bookReturn.equals(books.get(y).getTitle())){
                                         if(books.get(y).isRented){
                                             books.get(y).setisRented(false);
+
                                             users.get(y).numberOfBooks--;
                                             rentedList.remove(bookReturn);
                                             System.out.println("book has been returned");
@@ -282,6 +282,7 @@ public class main {
 
         scanner.close();
     }
+
     static LocalDateTime Renting(){
 
 
@@ -295,7 +296,6 @@ public class main {
     }
     static void Returned(LocalDateTime endTime){
         LocalDateTime returnTime = LocalDateTime.now();
-
         if(returnTime.isAfter(endTime)){
             System.out.println("LATE!!!!!");
         }
