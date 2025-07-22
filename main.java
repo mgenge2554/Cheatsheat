@@ -1,6 +1,6 @@
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class main {
@@ -60,7 +60,7 @@ public class main {
         String username;
         String password;
         boolean isRunning = true;
-        boolean isLogedIn = true;
+        boolean isLogedIn;
         boolean isCorrect = true;
 
 
@@ -92,95 +92,99 @@ public class main {
 
                 // Admin menu
                 while (isLogedIn) {
-                    for (int i = 0; i < AdminLength; i++) {
-                        if (AdminLogInfo.get(i).getUsername().equals(username) && (AdminLogInfo.get(i).getPassword().equals(password))) {
-
-                            System.out.println("Welcome " + username);
-                            System.out.println("""
-                                    Please choose an Option
-                                    1. Add a book to the libary
-                                    2. Remove a book
-                                    3. Add an account
-                                    4. View Libary
-                                    5. Log out
-                                    """);
-
-                            AdminChoice = scanner.next().charAt(0);
-                            scanner.nextLine();
 
 
-                            if (AdminChoice == '1') {
-                                System.out.print("please input a Book title: ");
-                                String bookTitle = scanner.nextLine();
+                        for (int i = 0; i < AdminLength; i++) {
+                            if (AdminLogInfo.get(i).getUsername().equals(username) && (AdminLogInfo.get(i).getPassword().equals(password))) {
 
-                                System.out.print("please input a Book Author: ");
+                                System.out.println("Welcome " + username);
+                                System.out.println("""
+                                        Please choose an Option
+                                        1. Add a book to the libary
+                                        2. Remove a book
+                                        3. Add an account
+                                        4. View Libary
+                                        5. Log out
+                                        """);
 
-                                String bookAuthor = scanner.nextLine();
-
-                                System.out.print("please input the number of pages: ");
-                                int bookPages = scanner.nextInt();
-                                boolean isRented = false;
-
-
-                                Book book = new Book(bookTitle, bookPages, bookAuthor, isRented);
-                                book.displayInfo();
-                                books.add(book);
-                                System.out.println("Book has been added");
-
-                                libaryLength = books.toArray().length;
+                                AdminChoice = scanner.next().charAt(0);
+                                scanner.nextLine();
 
 
-                            } else if (AdminChoice == '2') {
+                                if (AdminChoice == '1') {
+                                    System.out.print("please input a Book title: ");
+                                    String bookTitle = scanner.nextLine();
 
-                                System.out.print("Type in a Book title to delete: ");
-                                String search = scanner.nextLine();
+                                    System.out.print("please input a Book Author: ");
 
-                                for (int y = 0; y < libaryLength; y++) {
-                                    for (Book book : books) {
-                                        if (search.equals(book.getTitle())) {
-                                            books.remove(book);
-                                            System.out.println("book deleted");
-                                            System.out.println(Arrays.asList(books));
+                                    String bookAuthor = scanner.nextLine();
+
+                                    System.out.print("please input the number of pages: ");
+                                    int bookPages = scanner.nextInt();
+                                    boolean isRented = false;
+
+
+                                    Book book = new Book(bookTitle, bookPages, bookAuthor, isRented);
+                                    book.displayInfo();
+                                    books.add(book);
+                                    System.out.println("Book has been added");
+
+                                    libaryLength = books.toArray().length;
+
+
+                                } else if (AdminChoice == '2') {
+
+                                    System.out.print("Type in a Book title to delete: ");
+                                    String search = scanner.nextLine();
+
+                                    for (int y = 0; y < libaryLength; y++) {
+                                        for (Book book : books) {
+                                            if (search.equals(book.getTitle())) {
+                                                books.remove(book);
+                                                System.out.println("book deleted");
+                                                System.out.println(books);
+                                            }
                                         }
                                     }
-                                }
-                            }
-                            else if (AdminChoice == '3') {
-                                while(isCorrect) {
-                                    System.out.print("please enter a Username: ");
-                                    username = scanner.nextLine();
-                                    System.out.print("please enter a Password: ");
-                                    password = scanner.nextLine();
+                                } else if (AdminChoice == '3') {
+                                    while (isCorrect) {
+                                        System.out.print("please enter a Username: ");
+                                        username = scanner.nextLine();
+                                        System.out.print("please enter a Password: ");
+                                        password = scanner.nextLine();
 
-                                    if (username.length() < 4 || username.length() > 12) {
-                                        System.out.println("username must be between 4 - 12 characters");
+                                        if (username.length() < 4 || username.length() > 12) {
+                                            System.out.println("username must be between 4 - 12 characters");
 
-                                    }else if (username.contains(" ") || username.contains("_")) {
-                                        System.out.println("make sure there is no spaces or _");
+                                        } else if (username.contains(" ") || username.contains("_")) {
+                                            System.out.println("make sure there is no spaces or _");
 //a
-                                    }else if (!password.contains("!") && !password.contains("£")
-                                            && !password.contains("#") && !password.contains("%") &&
-                                            !password.contains("@")) {
-                                        System.out.println("A password must include a !, £, #, %, @");
+                                        } else if (!password.contains("!") && !password.contains("£")
+                                                && !password.contains("#") && !password.contains("%") &&
+                                                !password.contains("@")) {
+                                            System.out.println("A password must include a !, £, #, %, @");
 
-                                    }else{
-                                        users.add(new User(username, password));
+                                        } else {
+                                            users.add(new User(username, password));
+                                            //System.out.println(Arrays.asList(users)); // Confirms data entered
+                                            System.out.println("new user added");
+                                        }
 
-                                    //System.out.println(Arrays.asList(users)); // Confirms data entered
-                                    isCorrect= false;
-                                    isLogedIn = false;
+
+                                        isCorrect = false;
+                                        isLogedIn = false;
                                     }
-                                }
-                            } else if (AdminChoice == '4') {
-                                libaryLength = books.toArray().length;
-                                for(int y = 0 ; y < libaryLength ; y++){
-                                    books.get(y).displayInfo();
-                                }
-                            }else if (AdminChoice == '5') {
-                                isLogedIn = false;
 
+                                } else if (AdminChoice == '4') {
+                                    libaryLength = books.toArray().length;
+                                    for (int y = 0; y < libaryLength; y++) {
+                                        books.get(y).displayInfo();
+                                    }
+                                } else if (AdminChoice == '5') {
+                                    isLogedIn = false;
+
+                                }
                             }
-                        }
                     }
                 }
             }
@@ -214,7 +218,6 @@ public class main {
 
                                 System.out.println("Please type in a book title: ");
                                 String TitleSearch = scanner.nextLine();
-
                                 System.out.println(TitleSearch);
 
 
@@ -233,7 +236,6 @@ public class main {
                                                 rentedList.add(TitleSearch);
                                                 System.out.println(rentedList);
                                                 Renting();
-
 
                                             } else {
                                                 System.out.println("not found");
@@ -255,7 +257,6 @@ public class main {
                                     if(bookReturn.equals(books.get(y).getTitle())){
                                         if(books.get(y).isRented){
                                             books.get(y).setisRented(false);
-
                                             users.get(y).numberOfBooks--;
                                             rentedList.remove(bookReturn);
                                             System.out.println("book has been returned");
@@ -282,20 +283,19 @@ public class main {
 
         scanner.close();
     }
-
-    static LocalDateTime Renting(){
+    static void Renting(){
 
 
         LocalDateTime beginTime = LocalDateTime.now();
         LocalDateTime endTime = LocalDateTime.now().plusMinutes(1);
-
-        System.out.println(beginTime);
-        System.out.println(endTime);
-        return endTime;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        System.out.println(beginTime.format(formatter));
+        System.out.println("Your Book due date is " + endTime.format(formatter));
 
     }
     static void Returned(LocalDateTime endTime){
         LocalDateTime returnTime = LocalDateTime.now();
+
         if(returnTime.isAfter(endTime)){
             System.out.println("LATE!!!!!");
         }
