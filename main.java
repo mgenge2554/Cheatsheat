@@ -1,21 +1,14 @@
-import org.w3c.dom.ls.LSOutput;
-import javax.xml.crypto.Data;
-import java.lang.reflect.Array;
-import java.sql.SQLOutput;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
-import java.util.Timer;
 
 public class main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
 //Variables
-        Timer timer = new Timer();
+
 
         Admin admin1 = new Admin("Mgenge", "password");
         Admin admin2 = new Admin("Mpowell", "password1");
@@ -36,11 +29,30 @@ public class main {
         int usersLength = users.toArray().length;
 
         ArrayList<Book> books = new ArrayList<>();
-        Book book1 = new Book("Mistborn", 600, "Brandon", false);
-        Book book2 = new Book("Mistborn 2", 592, "Brandon", false);
+        Book book1 = new Book("Mistborn", 600, "Brandon Sanderson", false);
+        Book book2 = new Book("Mistborn 2", 592, "Brandon Sanderson", false);
+        Book book3 = new Book("Harry Potter and the Philosopher's Stone", 223, "JK Rowling", false);
+        Book book4 = new Book("Harry Potter and the Chamber of Secrets", 317, "JK Rowling", false);
+        Book book5 = new Book("Harry Potter and the Prisoner of Azkaban", 317, "JK Rowling", false);
+        Book book6 = new Book("Harry Potter and the Goblet of fire", 636, "JK Rowling", false);
+        Book book7 = new Book("Harry Potter and the Order of the Phoenix ", 766, "JK Rowling", false);
+        Book book8 = new Book("Harry Potter and Half Blood Prince", 607, "JK Rowling", false);
+        Book book9 = new Book("Harry Potter and the Deathly Hallows", 607, "JK Rowling", false);
         books.add(book1);
         books.add(book2);
+        books.add(book3);
+        books.add(book4);
+        books.add(book5);
+        books.add(book6);
+        books.add(book7);
+        books.add(book8);
+        books.add(book9);
+
+
         int libaryLength = books.toArray().length;
+
+        LocalDateTime beginTime = LocalDateTime.now();
+        LocalDateTime endTime = beginTime.plusMinutes(1);
 
 
         char logInChoice;
@@ -54,6 +66,7 @@ public class main {
 
         //Libary system (log in)
         while (isRunning) {
+
             System.out.println("""
                     Welcome to the Libary System. Please select an option:
                     1. Admin Login
@@ -61,6 +74,7 @@ public class main {
                     3. Turn off""");
 
             logInChoice = scanner.next().charAt(0);
+
 
 
             if (logInChoice == '1') {
@@ -112,7 +126,8 @@ public class main {
                                 book.displayInfo();
                                 books.add(book);
                                 System.out.println("Book has been added");
-                                books.get(i).displayInfo();
+
+                                libaryLength = books.toArray().length;
 
 
                             } else if (AdminChoice == '2') {
@@ -157,12 +172,13 @@ public class main {
                                     }
                                 }
                             } else if (AdminChoice == '4') {
+                                libaryLength = books.toArray().length;
                                 for(int y = 0 ; y < libaryLength ; y++){
                                     books.get(y).displayInfo();
                                 }
                             }else if (AdminChoice == '5') {
                                 isLogedIn = false;
-                                return;
+
                             }
                         }
                     }
@@ -216,6 +232,8 @@ public class main {
                                                 System.out.println(users.get(i).numberOfBooks);
                                                 rentedList.add(TitleSearch);
                                                 System.out.println(rentedList);
+                                                Renting();
+
 
 
                                             } else {
@@ -226,6 +244,7 @@ public class main {
                                                 System.out.println("you have too many books out");
                                                 users.get(i).numberOfBooks--;
                                                 System.out.println(users.get(i).numberOfBooks);
+
                                             }
                                         }
                                     }
@@ -233,13 +252,16 @@ public class main {
                             } else if (option == '2') {
                                 System.out.print("please enter the title of the book: ");
                                 String bookReturn = scanner.nextLine();
-                                for (int y = 0; y < users.toArray().length; y++) {
+                                for (int y = 0; y < books.toArray().length; y++) {
                                     if(bookReturn.equals(books.get(y).getTitle())){
                                         if(books.get(y).isRented){
                                             books.get(y).setisRented(false);
                                             users.get(y).numberOfBooks--;
-                                            users.get(y).rentedList.remove(bookReturn);
+                                            rentedList.remove(bookReturn);
                                             System.out.println("book has been returned");
+                                            System.out.println(rentedList);
+
+                                            Returned(endTime);
                                         }
                                     }
                                 }
@@ -259,5 +281,23 @@ public class main {
         }
 
         scanner.close();
+    }
+    static LocalDateTime Renting(){
+
+
+        LocalDateTime beginTime = LocalDateTime.now();
+        LocalDateTime endTime = LocalDateTime.now().plusMinutes(1);
+
+        System.out.println(beginTime);
+        System.out.println(endTime);
+        return endTime;
+
+    }
+    static void Returned(LocalDateTime endTime){
+        LocalDateTime returnTime = LocalDateTime.now();
+
+        if(returnTime.isAfter(endTime)){
+            System.out.println("LATE!!!!!");
+        }
     }
 }
