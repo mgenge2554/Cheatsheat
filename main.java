@@ -60,7 +60,7 @@ public class main {
         String username;
         String password;
         boolean isRunning = true;
-        boolean isLogedIn;
+        boolean isLogedIn = true;
         boolean isCorrect = true;
 
 
@@ -74,216 +74,211 @@ public class main {
                     3. Turn off""");
 
             logInChoice = scanner.next().charAt(0);
-
+            scanner.nextLine();
 
 
             if (logInChoice == '1') {
-                System.out.println("Please enter your Username and password");
-                System.out.print("Username: ");
-                scanner.nextLine();
-                username = scanner.nextLine();
-                System.out.println(username);
-                System.out.print("Password: ");
-
-                password = scanner.nextLine();
-                System.out.println(password);
-
-                isLogedIn = true;
-
-                // Admin menu
                 while (isLogedIn) {
+                    System.out.println("Please enter your Username and password");
+                    System.out.print("Username: \n");
+
+                    username = scanner.nextLine();
+                    System.out.println(username);
+                    System.out.println("Password: ");
+
+                    password = scanner.nextLine();
+                    System.out.println(password);
 
 
-                        for (int i = 0; i < AdminLength; i++) {
-                            if (AdminLogInfo.get(i).getUsername().equals(username) && (AdminLogInfo.get(i).getPassword().equals(password))) {
+                    // Admin menu
+                    for (int i = 0; i < AdminLength; i++) {
+                        if (AdminLogInfo.get(i).getUsername().equals(username) && (AdminLogInfo.get(i).getPassword().equals(password))) {
 
-                                System.out.println("Welcome " + username);
-                                System.out.println("""
-                                        Please choose an Option
-                                        1. Add a book to the libary
-                                        2. Remove a book
-                                        3. Add an account
-                                        4. View Libary
-                                        5. Log out
-                                        """);
-
-                                AdminChoice = scanner.next().charAt(0);
-                                scanner.nextLine();
-
-
-                                if (AdminChoice == '1') {
-                                    System.out.print("please input a Book title: ");
-                                    String bookTitle = scanner.nextLine();
-
-                                    System.out.print("please input a Book Author: ");
-
-                                    String bookAuthor = scanner.nextLine();
-
-                                    System.out.print("please input the number of pages: ");
-                                    int bookPages = scanner.nextInt();
-                                    boolean isRented = false;
-
-
-                                    Book book = new Book(bookTitle, bookPages, bookAuthor, isRented);
-                                    book.displayInfo();
-                                    books.add(book);
-                                    System.out.println("Book has been added");
-
-                                    libaryLength = books.toArray().length;
-
-
-                                } else if (AdminChoice == '2') {
-
-                                    System.out.print("Type in a Book title to delete: ");
-                                    String search = scanner.nextLine();
-
-                                    for (int y = 0; y < libaryLength; y++) {
-                                        for (Book book : books) {
-                                            if (search.equals(book.getTitle())) {
-                                                books.remove(book);
-                                                System.out.println("book deleted");
-                                                System.out.println(books);
-                                            }
-                                        }
-                                    }
-                                } else if (AdminChoice == '3') {
-                                    while (isCorrect) {
-                                        System.out.print("please enter a Username: ");
-                                        username = scanner.nextLine();
-                                        System.out.print("please enter a Password: ");
-                                        password = scanner.nextLine();
-
-                                        if (username.length() < 4 || username.length() > 12) {
-                                            System.out.println("username must be between 4 - 12 characters");
-
-                                        } else if (username.contains(" ") || username.contains("_")) {
-                                            System.out.println("make sure there is no spaces or _");
-//a
-                                        } else if (!password.contains("!") && !password.contains("£")
-                                                && !password.contains("#") && !password.contains("%") &&
-                                                !password.contains("@")) {
-                                            System.out.println("A password must include a !, £, #, %, @");
-
-                                        } else {
-                                            users.add(new User(username, password));
-                                            //System.out.println(Arrays.asList(users)); // Confirms data entered
-                                            System.out.println("new user added");
-                                        }
-
-
-                                        isCorrect = false;
-                                        isLogedIn = false;
-                                    }
-
-                                } else if (AdminChoice == '4') {
-                                    libaryLength = books.toArray().length;
-                                    for (int y = 0; y < libaryLength; y++) {
-                                        books.get(y).displayInfo();
-                                    }
-                                } else if (AdminChoice == '5') {
-                                    isLogedIn = false;
-
-                                }
-                            }
-                    }
-                }
-            }
-            else if (logInChoice == '2') {
-                System.out.println("Please enter your Username and password");
-                System.out.print("Username: ");
-                scanner.nextLine();
-                username = scanner.nextLine();
-                System.out.println(username);
-                System.out.print("Password: ");
-
-                password = scanner.nextLine();
-                System.out.println(password);
-
-                isLogedIn = true;
-
-                while (isLogedIn) {
-                    for (int i = 0; i < users.toArray().length; i++) {
-                        if (users.get(i).getUsername().equals(username) && (users.get(i).getPassword().equals(password))) {
                             System.out.println("Welcome " + username);
                             System.out.println("""
                                     Please choose an Option
-                                       1. Search a book
-                                       2. Return a book
-                                       3. Log out
+                                    1. Add a book to the libary
+                                    2. Remove a book
+                                    3. Add an account
+                                    4. View Libary
+                                    5. Log out
                                     """);
-                            char option = scanner.next().charAt(0);
+
+                            AdminChoice = scanner.next().charAt(0);
                             scanner.nextLine();
 
-                            if (option == '1') {
 
-                                System.out.println("Please type in a book title: ");
-                                String TitleSearch = scanner.nextLine();
-                                System.out.println(TitleSearch);
+                            if (AdminChoice == '1') {
+                                System.out.print("please input a Book title: ");
+                                String bookTitle = scanner.nextLine();
+
+                                System.out.print("please input a Book Author: ");
+
+                                String bookAuthor = scanner.nextLine();
+
+                                System.out.print("please input the number of pages: ");
+                                int bookPages = scanner.nextInt();
+                                boolean isRented = false;
 
 
-                                for (Book book : books) {
-                                    if (TitleSearch.equals(book.getTitle())) {
-                                        System.out.println("Book found");
-                                        if (book.isRented) {
-                                            System.out.println("cannot be rented");
-                                        } else if (!book.isRented) {
-                                            System.out.println("Would you like to rent? [Y/N] ");
-                                            char answer = scanner.next().toUpperCase().charAt(0);
-                                            if (answer == 'Y') {
-                                                book.setisRented(true);
-                                                user1.numberOfBooks++;
-                                                System.out.println(users.get(i).numberOfBooks);
-                                                rentedList.add(TitleSearch);
-                                                System.out.println(rentedList);
-                                                Renting();
+                                Book book = new Book(bookTitle, bookPages, bookAuthor, isRented);
+                                book.displayInfo();
+                                books.add(book);
+                                System.out.println("Book has been added");
 
-                                            } else {
-                                                System.out.println("not found");
-                                            }
-                                            if (users.get(i).numberOfBooks > 3) {
-                                                book.setisRented(false);
-                                                System.out.println("you have too many books out");
-                                                users.get(i).numberOfBooks--;
-                                                System.out.println(users.get(i).numberOfBooks);
+                                libaryLength = books.toArray().length;
 
-                                            }
+
+                            } else if (AdminChoice == '2') {
+
+                                System.out.print("Type in a Book title to delete: ");
+                                String search = scanner.nextLine();
+
+                                for (int y = 0; y < libaryLength; y++) {
+                                    for (Book book : books) {
+                                        if (search.equals(book.getTitle())) {
+                                            books.remove(book);
+                                            System.out.println("book deleted");
+                                            System.out.println(books);
                                         }
                                     }
                                 }
-                            } else if (option == '2') {
-                                System.out.print("please enter the title of the book: ");
-                                String bookReturn = scanner.nextLine();
-                                for (int y = 0; y < books.toArray().length; y++) {
-                                    if(bookReturn.equals(books.get(y).getTitle())){
-                                        if(books.get(y).isRented){
-                                            books.get(y).setisRented(false);
-                                            users.get(y).numberOfBooks--;
-                                            rentedList.remove(bookReturn);
-                                            System.out.println("book has been returned");
-                                            System.out.println(rentedList);
+                            } else if (AdminChoice == '3') {
+                                while (isCorrect) {
+                                    System.out.print("please enter a Username: ");
+                                    username = scanner.nextLine();
+                                    System.out.print("please enter a Password: ");
+                                    password = scanner.nextLine();
 
-                                            Returned(endTime);
-                                        }
+                                    if (username.length() < 4 || username.length() > 12) {
+                                        System.out.println("username must be between 4 - 12 characters");
+
+                                    } else if (username.contains(" ") || username.contains("_")) {
+                                        System.out.println("make sure there is no spaces or _");
+//a
+                                    } else if (!password.contains("!") && !password.contains("£")
+                                            && !password.contains("#") && !password.contains("%") &&
+                                            !password.contains("@")) {
+                                        System.out.println("A password must include a !, £, #, %, @");
+
+                                    } else {
+                                        users.add(new User(username, password));
+                                        //System.out.println(Arrays.asList(users)); // Confirms data entered
+                                        System.out.println("new user added");
                                     }
+
+
+                                    isCorrect = false;
+                                    isLogedIn = false;
                                 }
-                            }
-                            else if (option == '3') {
+
+                            } else if (AdminChoice == '4') {
+                                libaryLength = books.toArray().length;
+                                for (int y = 0; y < libaryLength; y++) {
+                                    books.get(y).displayInfo();
+                                }
+                            } else if (AdminChoice == '5') {
                                 isLogedIn = false;
+
                             }
                         }
                     }
                 }
+            } else if (logInChoice == '2') {
+                        while (isLogedIn) {
+                        System.out.println("Please enter your Username and password");
+                        System.out.print("Username: ");
 
+                        username = scanner.nextLine();
+                        System.out.println(username);
+
+                        System.out.print("Password: ");
+                        password = scanner.nextLine();
+                        System.out.println(password);
+
+
+
+
+                        for (int i = 0; i < users.toArray().length; i++) {
+                            if (users.get(i).getUsername().equals(username) && (users.get(i).getPassword().equals(password))) {
+                                System.out.println("Welcome " + username);
+                                System.out.println("""
+                                        Please choose an Option
+                                           1. Search a book
+                                           2. Return a book
+                                           3. Log out
+                                        """);
+                                char option = scanner.next().charAt(0);
+                                scanner.nextLine();
+
+                                if (option == '1') {
+
+                                    System.out.println("Please type in a book title: ");
+                                    String TitleSearch = scanner.nextLine();
+                                    System.out.println(TitleSearch);
+
+
+                                    for (Book book : books) {
+                                        if (TitleSearch.equals(book.getTitle())) {
+                                            System.out.println("Book found");
+                                            if (book.isRented) {
+                                                System.out.println("cannot be rented");
+                                            } else if (!book.isRented) {
+                                                System.out.println("Would you like to rent? [Y/N] ");
+                                                char answer = scanner.next().toUpperCase().charAt(0);
+                                                if (answer == 'Y') {
+                                                    book.setisRented(true);
+                                                    user1.numberOfBooks++;
+                                                    System.out.println(users.get(i).numberOfBooks);
+                                                    rentedList.add(TitleSearch);
+                                                    System.out.println(rentedList);
+                                                    Renting();
+
+                                                } else {
+                                                    System.out.println("not found");
+                                                }
+                                                if (users.get(i).numberOfBooks > 3) {
+                                                    book.setisRented(false);
+                                                    System.out.println("you have too many books out");
+                                                    users.get(i).numberOfBooks--;
+                                                    System.out.println(users.get(i).numberOfBooks);
+
+                                                }
+                                            }
+                                        }
+                                    }
+                                } else if (option == '2') {
+                                    System.out.print("please enter the title of the book: ");
+                                    String bookReturn = scanner.nextLine();
+                                    for (int y = 0; y < books.toArray().length; y++) {
+                                        if (bookReturn.equals(books.get(y).getTitle())) {
+                                            if (books.get(y).isRented) {
+                                                books.get(y).setisRented(false);
+                                                users.get(y).numberOfBooks--;
+                                                rentedList.remove(bookReturn);
+                                                System.out.println("book has been returned");
+                                                System.out.println(rentedList);
+
+                                                Returned(endTime);
+                                            }
+                                        }
+                                    }
+                                } else if (option == '3') {
+                                    isLogedIn = false;
+                                }
+                            }
+                        }
+                    }
+
+                } else if (logInChoice == '3') {
+                    System.out.println("Thank you");
+                    isRunning = false;
+                }
             }
-            else if (logInChoice == '3') {
-                System.out.println("Thank you");
-                isRunning = false;
-            }
-        }
 
         scanner.close();
-    }
-    static void Renting(){
+        }
+    static void Renting () {
 
 
         LocalDateTime beginTime = LocalDateTime.now();
@@ -293,10 +288,10 @@ public class main {
         System.out.println("Your Book due date is " + endTime.format(formatter));
 
     }
-    static void Returned(LocalDateTime endTime){
+    static void Returned (LocalDateTime endTime){
         LocalDateTime returnTime = LocalDateTime.now();
 
-        if(returnTime.isAfter(endTime)){
+        if (returnTime.isAfter(endTime)) {
             System.out.println("LATE!!!!!");
         }
     }
